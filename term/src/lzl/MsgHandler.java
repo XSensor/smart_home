@@ -20,6 +20,7 @@ public class MsgHandler {
         String[] sa = wsd.split(",");
 //        System.out.println(wsd);
         ws.send(G.msg("humiture", sa[0], sa[1]));
+        ws.send("gethumiture");
     }
     //
     void getspeed(WebSocket ws, JSONArray data) {
