@@ -6,7 +6,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
     </content>
     <content url="file://$MODULE_DIR$/../termser">
-      <sourceFolder url="file://$MODULE_DIR$/../termser/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../termser/G" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

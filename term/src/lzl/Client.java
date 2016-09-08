@@ -6,7 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.net.URI;
-import ser.G;
+import G.G;
 
 /**
  * Created by tom on 16-8-14.
@@ -19,6 +19,9 @@ public class Client extends WebSocketClient {
 
     Client(URI u) {
         super(u);
+    }
+    Client(URI u, String user, String pw) {
+        super(u); USER = user; PASSWORD = pw;
     }
     @Override
     public void onOpen(ServerHandshake serverHandshake) {

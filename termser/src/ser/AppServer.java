@@ -1,5 +1,6 @@
 package ser;
 
+import ser.Main;
 import org.java_websocket.WebSocket;
 import org.java_websocket.handshake.ClientHandshake;
 import org.java_websocket.server.WebSocketServer;
@@ -7,6 +8,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.net.InetSocketAddress;
+
+import G.G;
+
 /**
  * Created by tom on 16-8-14.
  */
@@ -19,27 +23,32 @@ public class AppServer extends WebSocketServer {
         try {
             JSONArray ja = new JSONArray(s);
             String msg = ja.getString(0);
+            // 在连接到另一方之前妄图处理别的消息
             if (!msg.equals(G.LINK)) {
                 ws.send(G.msg(G.UNLINK));
                 return;
             }
             String user = ja.getString(1);
             String passwd = ja.getString(2);
+            // 验证用户名密码
             if (Main.verify(user, passwd)) {
                 Line line = Line.mid.get(user);
                 WebSocket term = line == null ? null : line.term;
+                // 云终端没在线
                 if (term == null) {
                     // term is offline
-                    ws.send(G.msg("TERMOFF"));
+                    ws.send(G.msg(G.TERMOFF));
                     return;
                 }
-                // previous app's websocket
+                // 若之前连接了别的app，断开它
                 if (line.app != null && Line.mapp.get(line.app) != null) {
                     Line.mapp.put(line.app, null);
                 }
-                // map this websocket
+                // 映射此app WS
                 Line.mapp.put(ws, line);
                 line.app = ws;
+                // 发送连接成功的消息
+                ws.send(G.msg(G.LINKSUC));
             } else {
                 // username or password error
                 ws.send(G.msg(G.LINKERR));

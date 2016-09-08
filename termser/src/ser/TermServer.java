@@ -8,6 +8,8 @@ import org.json.JSONException;
 
 import java.net.InetSocketAddress;
 
+import G.G;
+
 /**
  * Created by tom on 16-8-14.
  */
