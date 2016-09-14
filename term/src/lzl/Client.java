@@ -27,18 +27,17 @@ public class Client extends WebSocketClient {
     public void onOpen(ServerHandshake serverHandshake) {
         send(G.msg(G.LINK, USER, PASSWORD));
         hand = new Handler(getConnection(), new MsgHandler());
+        System.out.println("linked to cloud.");
     }
 
     @Override
     public void onMessage(String s) {
         try {
-            JSONArray ja = new JSONArray(s);
-            if (!hand.handle(ja.getString(0), ja)) {
-                G.log("Handle " + s + " FAILURE.");
-            }
-        } catch (JSONException e) {
+            handle(new JSONArray(s));
+        } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
     @Override
     public void onClose(int i, String s, boolean b) {
@@ -46,5 +45,18 @@ public class Client extends WebSocketClient {
     @Override
     public void onError(Exception e) {
         G.log(e.toString());
+    }
+
+    public void handle(JSONArray data) {
+        try {
+            String msg = data.getString(0);
+            if (!hand.handle(msg, data)) {
+                G.log("Handle " + msg + " FAILURE.");
+            } else {
+                G.log("Handle " + msg + " SUCCESS.");
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }

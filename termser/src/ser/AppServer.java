@@ -49,6 +49,7 @@ public class AppServer extends WebSocketServer {
                 line.app = ws;
                 // 发送连接成功的消息
                 ws.send(G.msg(G.LINKSUC));
+                System.out.println(user + " LINKSUC");
             } else {
                 // username or password error
                 ws.send(G.msg(G.LINKERR));
@@ -71,6 +72,7 @@ public class AppServer extends WebSocketServer {
     }
     @Override
     public void onMessage(WebSocket webSocket, String s) {
+        System.out.println(s);
         // find corresponding term's websocket
         Line line = Line.mapp.get(webSocket);
         WebSocket term = line == null ? null : line.term;

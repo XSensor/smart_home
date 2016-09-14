@@ -2,10 +2,13 @@
   <artifact type="jar" name="termser:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/termser_jar</output-path>
     <root id="archive" name="termser.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$USER_HOME$/META-INF/MANIFEST.MF" />
+      </element>
       <element id="module-output" name="termser" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/../sqlite-jdbc-3.8.11.2.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/../org.json.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/../java_websocket.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../org.json.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../sqlite-jdbc-3.8.11.2.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>
